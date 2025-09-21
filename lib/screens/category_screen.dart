@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import '../providers/meals_provider.dart';
 import '../widgets/common/meal_card.dart';
 import 'add_to_cart_modal.dart';
@@ -30,7 +31,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
         slivers: [
           _buildAppBar(context),
           _buildSearchBar(),
-          // _buildMealsGrid(mealsAsync),
+          _buildMealsGrid(mealsAsync),
         ],
       ),
     );
@@ -139,7 +140,6 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
         ),
       ),
 
-      // 🔹 Leading (back button)
       leading: Container(
         margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
@@ -154,7 +154,6 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
         ),
       ),
 
-      // 🔹 Actions (menu button)
       actions: [
         Container(
           height: 32,
@@ -219,18 +218,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
               ),
             ),
             const SizedBox(width: 12),
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: Colors.purple.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.filter_alt_sharp, color: Color(0xff5e53b0)),
-                onPressed: () {},
-              ),
-            ),
+           SvgPicture.asset("assets/filter-svgrepo-com 1.svg"),
           ],
         ),
       ),
