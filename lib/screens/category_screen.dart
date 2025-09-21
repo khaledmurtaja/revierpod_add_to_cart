@@ -218,7 +218,23 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
               ),
             ),
             const SizedBox(width: 12),
-           SvgPicture.asset("assets/filter-svgrepo-com 1.svg"),
+           Container(
+             decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(8),
+               color: Colors.white,
+               boxShadow: [
+                 BoxShadow(
+                   color: Colors.black.withOpacity(0.1),
+                   spreadRadius: 2,
+                   blurRadius: 9,
+                   offset: const Offset(0, 3),
+                 ),
+               ],
+             ),
+               child: Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: SvgPicture.asset("assets/filter-svgrepo-com 1.svg"),
+               )),
           ],
         ),
       ),
@@ -247,7 +263,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.7,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
             ),

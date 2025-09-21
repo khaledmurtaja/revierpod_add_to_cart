@@ -19,6 +19,7 @@ class MealCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
+      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: onTap,
@@ -26,7 +27,7 @@ class MealCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(flex: 2, child: _buildImage()),
+            _buildImage(context),
             Expanded(child: _buildContent()),
           ],
         ),
@@ -34,7 +35,7 @@ class MealCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(BuildContext context) {
     return Stack(
       children: [
         ClipRRect(
@@ -42,6 +43,7 @@ class MealCard extends StatelessWidget {
           child: CachedNetworkImage(
             imageUrl: meal.imageUrl,
             width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.14,
             fit: BoxFit.cover,
             placeholder: (context, url) => Container(
               color: Colors.grey[200],
@@ -64,67 +66,87 @@ class MealCard extends StatelessWidget {
               },
             ),
           ),
-        Positioned(
-          bottom: 8,
-          right: 8,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.purple,
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.add, color: Colors.white, size: 20),
-              onPressed: onTap,
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-              padding: EdgeInsets.zero,
-            ),
-          ),
-        ),
       ],
     );
   }
 
   Widget _buildContent() {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 8,left: 8,top: 8),
+          child: Text(
             meal.name,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 4),
-          Text(
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8,right: 8,bottom: 8),
+          child: Text(
             meal.description,
-            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            style: TextStyle(fontSize: 12, color: Colors.grey[600]),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (meal.price > 0)
-                Text(
+        ),
+
+        Spacer(),
+        Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(7),
+                  topRight: Radius.circular(7),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 9,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: meal.price > 0
+                    ? Text(
                   '${meal.price.toStringAsFixed(2)} \$',
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: Colors.purple,
+                    color: Color(0xff5D4FBE),
                   ),
                 )
-              else
-                Text(
+                    : Text(
                   'Price upon selection',
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                  ),
                 ),
-            ],
-          ),
-        ],
-      ),
+              ),
+            ),
+            Positioned(
+              right: 8,
+              child: InkWell(
+                onTap: onTap,
+                child: SvgPicture.asset(
+                  "assets/plus-square-svgrepo-com 1 (1).svg"
+                ),
+              ),
+            )
+          ],
+        )
+
+
+      ],
     );
   }
 }
