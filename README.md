@@ -1,4 +1,8 @@
-➡️ [Watch the demo video](assets/Recording%202025-09-21%20205843.mp4)
+## 📸 Screenshots
+
+<img src="assets/WhatsApp Image 2025-09-21 at 21.07.10_2d5cc24e.jpg" width="300" />
+<img src="assets/WhatsApp Image 2025-09-21 at 21.07.10_3d38445b.jpg" width="300" />
+<img src="assets/screenshot3.png" width="300" />
 
 # Add to Cart - Flutter E-commerce App
 
