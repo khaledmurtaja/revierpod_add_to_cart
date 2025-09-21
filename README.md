@@ -1,3 +1,5 @@
+➡️ [Watch the demo video](assets/Recording%202025-09-21%20205843.mp4)
+
 # Add to Cart - Flutter E-commerce App
 
 A Flutter e-commerce application that demonstrates a complete "Add to Cart" flow with product customization options. This app is built using MVVM architecture with Riverpod for state management.
