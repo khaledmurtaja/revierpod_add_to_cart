@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'screens/category_screen.dart';
 import 'screens/cart_screen.dart';
 
@@ -43,8 +44,8 @@ class MainScreen extends ConsumerWidget {
             ),
           );
         },
-        backgroundColor: Colors.purple,
-        child: const Icon(Icons.shopping_cart, color: Colors.white),
+        backgroundColor: Colors.white,
+        child:  SvgPicture.asset("assets/cart.svg"),
       ),
     );
   }

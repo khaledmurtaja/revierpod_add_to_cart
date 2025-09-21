@@ -28,6 +28,7 @@ class OptionSelector extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            Spacer(),
             if (option.isRequired) ...[
               const SizedBox(width: 4),
               Text(
@@ -102,6 +103,7 @@ class OptionSelector extends StatelessWidget {
                       '${value.price.toStringAsFixed(2)} \$',
                       style: TextStyle(
                         fontSize: 14,
+                        fontFamily: "irish",
                         fontWeight: FontWeight.w600,
                         color: isSelected ? Colors.purple : Colors.grey[600],
                       ),

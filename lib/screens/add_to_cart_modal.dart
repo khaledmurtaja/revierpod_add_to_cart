@@ -42,15 +42,24 @@ class _AddToCartModalState extends ConsumerState<AddToCartModal> {
       ),
       child: Column(
         children: [
-          _buildHeader(meal, totalPrice),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: Text(
+                      meal.name,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   _buildMealImage(meal),
                   const SizedBox(height: 20),
+                  _buildHeader(meal, totalPrice),
                   _buildOptions(selectedOptions),
                 ],
               ),
@@ -63,59 +72,39 @@ class _AddToCartModalState extends ConsumerState<AddToCartModal> {
   }
 
   Widget _buildHeader(Meal meal, double totalPrice) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  meal.name,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  QuantitySelector(
+                    initialQuantity: _quantity,
+                    onQuantityChanged: (quantity) {
+                      setState(() {
+                        _quantity = quantity;
+                      });
+                    },
                   ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    QuantitySelector(
-                      initialQuantity: _quantity,
-                      onQuantityChanged: (quantity) {
-                        setState(() {
-                          _quantity = quantity;
-                        });
-                      },
+                  const Spacer(),
+                  Text(
+                    '${(totalPrice * _quantity).toStringAsFixed(2)} \$',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: "irish",
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                    const Spacer(),
-                    Text(
-                      '${(totalPrice * _quantity).toStringAsFixed(2)} \$',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.purple,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -124,7 +113,7 @@ class _AddToCartModalState extends ConsumerState<AddToCartModal> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: SizedBox(
-          width: 200,
+          width: double.infinity,
           height: 200,
           child: CachedNetworkImage(
             imageUrl: meal.imageUrl,
@@ -193,19 +182,33 @@ class _AddToCartModalState extends ConsumerState<AddToCartModal> {
         child: ElevatedButton(
           onPressed: isValid ? () => _addToCart(meal) : null,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.purple,
+            backgroundColor: Color(0xff5d4fbe),
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
             elevation: 0,
           ),
-          child: Text(
-            'Add To Cart - ${(totalPrice * _quantity).toStringAsFixed(2)} \$',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Add To Cart',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Text(
+                ' ${(totalPrice * _quantity).toStringAsFixed(2)} \$',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+            ],
           ),
         ),
       ),

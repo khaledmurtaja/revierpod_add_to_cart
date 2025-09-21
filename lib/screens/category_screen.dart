@@ -59,8 +59,8 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(
-                  'https://upload.wikimedia.org/wikipedia/commons/5/50/Shrimp_pasta.jpg',
+                Image.asset(
+                  'assets/Rectangle 58.jpg',
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => Container(
                     color: Colors.orange[200],
@@ -147,7 +147,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 18, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios, size: 18, color: Colors.black),
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(), // removes default min size
           onPressed: () => Navigator.of(context).pop(),

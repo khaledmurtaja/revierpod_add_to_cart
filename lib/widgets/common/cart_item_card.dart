@@ -19,6 +19,7 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -131,6 +132,7 @@ class CartItemCard extends StatelessWidget {
     return QuantitySelector(
       initialQuantity: cartItem.quantity,
       onQuantityChanged: onQuantityChanged,
+      isColumn: true,
     );
   }
 }
